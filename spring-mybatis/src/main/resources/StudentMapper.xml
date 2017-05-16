@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.ildivoray.mapper.StudentMapper">
+  <select id="query"  resultType="student">
+    select id,name,qq from student
+  </select>
+  
+   <select id="getStudentByid"  parameterType="long" resultType="student">
+    select id,name,qq from student where id=#{id}
+  </select>
+
+<insert id="add" parameterType="student" >
+  <!-- <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+  SELECT LAST_INSERT_ID()
+  </selectKey> -->
+  insert into student(name,qq)values(#{name},#{qq})  
+  </insert>
+  <update id="update" parameterType="student" >
+        update student set name=#{name},qq=#{qq} where id=#{id}
+  </update> 
+  <delete id="delete" parameterType="long">
+        delete from student where id=#{id}
+    </delete>
+    </mapper>
+ <!-- <resultMap type="Student" id="StudentResultMap">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="qq" jdbcType="INTEGER" property="qq"/>
+  </resultMap>  -->
+<!-- 	<sql id="find_student_where">
+	使用动态sql语句,通过if判断,满足条件进行sql扫描 
+		 商品查询条件通过StudentQueryVo包装对象中studentCustom属性传递
+		 <if test="studentCustom!=null">
+		 	<if test="studentCustom.name!null=null and studentCustom.name!=' '">
+		 		student.name LIKE '${sutdentCustom.name}%'
+		 	</if>
+		 </if>
+	
+	</sql> -->
+	
+	
+<!-- 	
+	</sql>
+  <select id="query"  resultMap="StudentResultMap">
+    select name,qq from student
+  </select> -->
+  
+<!--    <insert id="insertName" parameterType="java.lang.String">
+  insert into users(name)values(#{name})  
+  </insert> -->
+
